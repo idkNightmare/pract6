@@ -1,0 +1,37 @@
+import numpy as np
+import time
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+
+def binary_search_iterative(arr, target):
+    left=0
+    right = len(arr) -1
+    while left <= right:
+        mid = (left+right)//2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] > target:
+            right = mid - 1
+        else:
+            left = mid + 1
+    return -1
+
+arr = np.arange(10000000)
+target = 9999999     
+
+start_linear = time.perf_counter()
+res_linear = linear_search(arr, target)
+end_linear = time.perf_counter()
+
+time_linear = end_linear - start_linear
+print(f"Лінійний пошук знайшов індекс {res_linear} за {time_linear:.6f} сек")
+
+start_binary = time.perf_counter()
+res_binary = binary_search_iterative(arr, target)
+end_binary = time.perf_counter()
+
+time_binary = end_binary - start_binary
+print(f"Бінарний пошук знайшов індекс {res_binary} за {time_binary:.6f} сек")
